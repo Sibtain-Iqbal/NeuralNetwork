@@ -80,3 +80,29 @@ def plot_loss_curves(history):
   plt.title("accuracy")
   plt.xlabel("epochs")
   plt.legend()
+
+
+#   iput of the model
+
+import matplotlib.pyplot as plt
+
+# 1. Select 50 random images from the test set
+num_images = 100
+random_indices = np.random.choice(x_test.shape[0], num_images, replace=False)
+test_images = x_test[random_indices]
+true_labels = np.argmax(y_test[random_indices], axis=1)
+
+# 2. Predict the labels for these images
+predicted_labels = np.argmax(model.predict(test_images), axis=1)
+
+# 3. Plot the images with their predicted and true labels
+plt.figure(figsize=(20, 10))
+rows = num_images // 10
+for i in range(num_images):
+    plt.subplot(rows, 10, i + 1)
+    plt.imshow(test_images[i], cmap='gray')
+    plt.title(f"True: {true_labels[i]}\nPred: {predicted_labels[i]}")
+    plt.axis('off')
+
+plt.tight_layout()
+plt.show()
