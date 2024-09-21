@@ -51,3 +51,32 @@ model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accur
 
 # 4. Train the Model
 history = model.fit(x_train, y_train, epochs=10, batch_size=32, validation_split=0.2, verbose=1)
+
+
+# PLot the validation and training curvees seperately
+def plot_loss_curves(history):
+  """
+  Returns seperate Loss curves for training and validation metrics
+  """
+  loss= history.history["loss"]
+  val_loss= history.history["val_loss"]
+
+  accuracy= history.history["accuracy"]
+  val_accuracy= history.history["val_accuracy"]
+
+  epochs = range(len(history.history["loss"]))
+
+  # PLot Loss
+  plt.plot(epochs, loss, label="training_loss")
+  plt.plot(epochs, val_loss, label="val_loss")
+  plt.title("loss")
+  plt.xlabel("epochs")
+  plt.legend()
+
+  # PLot accuracy
+  plt.figure() # Create a new figure
+  plt.plot(epochs, accuracy, label="training_accuracy")
+  plt.plot(epochs, val_accuracy, label="val_accuracy")
+  plt.title("accuracy")
+  plt.xlabel("epochs")
+  plt.legend()
