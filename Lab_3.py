@@ -40,3 +40,14 @@ model.add(Flatten(input_shape=(28, 28)))  # Flatten the 28x28 images to a 1D vec
 model.add(Dense(511, activation='relu'))  # Fully connected layer with 512 neurons
 model.add(Dense(256, activation='relu'))  # Fully connected layer with 256 neurons v  
 model.add(Dense(10, activation='softmax'))  # Output layer with 10 units (one for each class)
+
+from tensorflow.keras.utils import plot_model
+plot_model(model=model, show_shapes=True)
+
+# 3. Compile the Model
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# tf.keras.optimizers.Adam(learning_rate=0.001)
+
+# 4. Train the Model
+history = model.fit(x_train, y_train, epochs=10, batch_size=32, validation_split=0.2, verbose=1)
